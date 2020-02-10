@@ -1,8 +1,8 @@
 import { PaginationProps } from '@livelybone/react-pagination'
 import { ReactNode } from 'react'
 
-export interface ReactQueryListProps {
-  children?: ReactNode | ((list: any[], error: string | Error) => ReactNode)
+export interface ReactQueryListProps<T> {
+  children?: ReactNode | ((list: T[], error: string | Error) => ReactNode)
   queryAtMounted?: boolean
   className?: string
   paginationProps?: Pick<
@@ -13,7 +13,7 @@ export interface ReactQueryListProps {
 
   onError?(error: string | Error): any
 
-  onQuery<T extends any>(params: {
+  onQuery(params: {
     pageSize: number
     pageIndex: number
   }): Promise<{
@@ -24,9 +24,9 @@ export interface ReactQueryListProps {
   }>
 }
 
-export interface ReactQueryListState {
+export interface ReactQueryListState<T> {
   loading: boolean
-  list: any[]
+  list: T[]
   error: string | Error
-  $paginationProps: NonNullable<ReactQueryListProps['paginationProps']>
+  $paginationProps: NonNullable<ReactQueryListProps<T>['paginationProps']>
 }

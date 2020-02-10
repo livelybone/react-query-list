@@ -1,8 +1,8 @@
 import { PureComponent, ReactNode } from 'react'
 import ReactPagination, { PaginationProps } from '@livelybone/react-pagination'
 
-interface ReactQueryListProps {
-  children?: ReactNode | ((list: any[], error: string | Error) => ReactNode)
+interface ReactQueryListProps<T extends any> {
+  children?: ReactNode | ((list: T[], error: string | Error) => ReactNode)
   queryAtMounted?: boolean
   className?: string
   paginationProps?: Pick<
@@ -13,7 +13,7 @@ interface ReactQueryListProps {
 
   onError?(error: string | Error): any
 
-  onQuery<T extends any>(params: {
+  onQuery(params: {
     pageSize: number
     pageIndex: number
   }): Promise<{
@@ -24,28 +24,28 @@ interface ReactQueryListProps {
   }>
 }
 
-interface ReactQueryListState {
+interface ReactQueryListState<T extends any> {
   loading: boolean
-  list: any[]
+  list: T[]
   error: string | Error
-  $paginationProps: NonNullable<ReactQueryListProps['paginationProps']>
+  $paginationProps: NonNullable<ReactQueryListProps<T>['paginationProps']>
 }
 
-declare class ReactQueryList extends PureComponent<
-  ReactQueryListProps,
-  ReactQueryListState
+declare class ReactQueryList<T extends any> extends PureComponent<
+  ReactQueryListProps<T>,
+  ReactQueryListState<T>
 > {
   paginationRef: ReactPagination
 
-  constructor(props: ReactQueryListProps)
+  constructor(props: ReactQueryListProps<T>)
 
   query(reset?: boolean): Promise<void>
 
   componentDidMount(): void
 
   componentDidUpdate(
-    prevProps: Readonly<ReactQueryListProps>,
-    prevState: Readonly<ReactQueryListState>,
+    prevProps: Readonly<ReactQueryListProps<T>>,
+    prevState: Readonly<ReactQueryListState<T>>,
     snapshot?: any,
   ): void
 

@@ -9,13 +9,13 @@ const DefaultPaginationProps: PaginationProps = {
   pageIndex: 1,
 }
 
-export default class ReactQueryList extends PureComponent<
-  ReactQueryListProps,
-  ReactQueryListState
+export default class ReactQueryList<T extends any> extends PureComponent<
+  ReactQueryListProps<T>,
+  ReactQueryListState<T>
 > {
   paginationRef!: ReactPagination
 
-  constructor(props: ReactQueryListProps) {
+  constructor(props: ReactQueryListProps<T>) {
     super(props)
     this.state = {
       $paginationProps: { ...DefaultPaginationProps, ...props.paginationProps },
@@ -58,8 +58,8 @@ export default class ReactQueryList extends PureComponent<
   }
 
   componentDidUpdate(
-    prevProps: Readonly<ReactQueryListProps>,
-    prevState: Readonly<ReactQueryListState>,
+    prevProps: Readonly<ReactQueryListProps<T>>,
+    prevState: Readonly<ReactQueryListState<T>>,
     snapshot?: any,
   ): void {
     if (
