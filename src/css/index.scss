@@ -51,8 +51,9 @@
 
     .input {
       box-sizing: border-box;
+      width: size(6);
       height: size(2.8);
-      padding: 0 size();
+      padding: 0 size(0.6);
       margin: 0 size(2) 0 size();
       border: 1px solid $border;
       border-radius: size(0.3);
