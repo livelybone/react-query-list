@@ -1,7 +1,7 @@
 import { PaginationProps } from '@livelybone/react-pagination'
 import { ReactNode } from 'react'
 
-export interface ReactQueryListProps<T> {
+export interface ReactQueryListProps<T extends any> {
   children?: ReactNode | ((list: T[], error: string | Error) => ReactNode)
   queryAtMounted?: boolean
   className?: string
@@ -24,7 +24,7 @@ export interface ReactQueryListProps<T> {
   }>
 }
 
-export interface ReactQueryListState<T> {
+export interface ReactQueryListState<T extends any> {
   loading: boolean
   list: T[]
   error: string | Error
