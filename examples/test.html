@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ReactQueryList</title>
+    <!--  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>-->
+    <!--  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>-->
+    <!--china region: If your example running slow at begin, please try to use the follow CDN-->
+    <script src="https://cdn.bootcss.com/react/16.9.0/umd/react.development.js" crossorigin></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.9.0/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js" crossorigin></script>
+    <script src="../lib/umd/index.js"></script>
+    <link rel="stylesheet" href="../lib/css/index.css">
+</head>
+<body>
+<div id="module"></div>
+
+<script type="text/babel">
+const module = document.getElementById('module')
+
+// Get the target component
+// maybe it is a property of ReactQueryList, You should get it like this way: `ReactQueryList[theComponentName]`
+const Comp = ReactQueryList
+
+// const App = () => {
+//   const [state, setState] = React.useState(1)
+//   const sState = () => {
+//     Promise.resolve().then(() => {
+//       console.log('set state')
+//     })
+//     new Promise(res => setTimeout(res)).then(() => {
+//       console.log('set state 1')
+//     })
+//     setState(pre => pre + 1)
+//   }
+//   console.log(state)
+//
+//   return (
+//     <div>
+//       <button onClick={() => sState()}>click</button>
+//       <Comp />
+//     </div>
+//   )
+// }
+
+class App extends React.Component {
+  ref = null
+
+  state = {
+    count: 0,
+  }
+
+  sState() {
+    Promise.resolve().then(() => {
+      console.log('set state')
+    })
+    new Promise(res => setTimeout(res)).then(() => {
+      console.log('set state 1')
+    })
+    this.setState(pre => ({ count: pre.count + 1 }))
+  }
+
+  render() {
+    console.log(this.state.count)
+    return (
+      <div>
+        <button onClick={() => this.sState()}>click</button>
+        <Comp paginationProps={{ pageIndex: 3 }} ref={c => {
+          this.ref = c
+          window.ref = c
+        }} onQuery={() => new Promise(res => setTimeout(() => res({ list: [{}, {}], pageCount: 10 }), 2000))} />
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App />, module)
+</script>
+</body>
+</html>

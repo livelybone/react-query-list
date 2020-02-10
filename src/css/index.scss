@@ -1,0 +1,100 @@
+.react-query-list {
+  $main: #3491c3;
+  $border: #ddd;
+  $base-size: 10px;
+  $font: #666;
+  $font-light: #999;
+
+  @function size($val: 1) {
+    @return $val * $base-size;
+  }
+
+  $border-radius: size(0.3);
+
+  @mixin no-select() {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .loading-wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    line-height: 100vh;
+    color: $main;
+    text-align: center;
+    background: rgba(#fff, 0.2);
+
+    .react-loading {
+      width: 2em;
+    }
+  }
+
+  .pagination {
+    margin: size(2) 0 0;
+    font-size: size(1.4);
+    color: $font;
+    text-align: center;
+    overflow: hidden;
+
+    .label {
+      height: size(2.8);
+      line-height: size(2.8);
+      @include no-select();
+      color: $font-light;
+    }
+
+    .input {
+      box-sizing: border-box;
+      height: size(2.8);
+      padding: 0 size();
+      margin: 0 size(2) 0 size();
+      border: 1px solid $border;
+      border-radius: size(0.3);
+      line-height: size(2.6);
+      color: $font;
+      outline: none;
+
+      &:focus {
+        border-color: $main;
+      }
+    }
+
+    .page-btn {
+      display: inline-block;
+      box-sizing: border-box;
+      min-width: size(2.8);
+      height: size(2.8);
+      line-height: size(2.6);
+      padding: 0 size(0.4);
+      margin: 0 0 0 size();
+      border: 1px solid $border;
+      border-radius: $border-radius;
+      text-align: center;
+      cursor: pointer;
+      vertical-align: middle;
+      @include no-select();
+
+      &:hover {
+        background: rgba($main, 0.3);
+      }
+
+      &.disabled {
+        cursor: default;
+        background: rgba(#000, 0.1);
+        border-color: rgba($border, 0.1);
+      }
+
+      &.active {
+        color: #fff;
+        background: $main;
+        border-color: $main;
+      }
+    }
+  }
+}
