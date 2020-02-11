@@ -26,8 +26,21 @@ export default class ReactQueryList<T extends any> extends PureComponent<
   }
 
   query(reset?: boolean) {
-    this.setState({ loading: true })
+    /**
+     * 当请求处理时间 < 200ms 时不显示 loading
+     * loading 显示时间至少为 500ms，不然看起来像闪屏
+     *
+     * Loading component should not displayed when the request processing time is < 200ms
+     * Loading component should displayed at least 500ms, otherwise it will look like a flash screen
+     * */
+    let pro: Promise<void>
+    const timer = setTimeout(() => {
+      this.setState({ loading: true })
+      pro = new Promise(res => setTimeout(res, 500))
+    }, 200)
+
     if (reset) this.paginationRef.setPageNumber(1, false)
+
     return Promise.resolve().then(() => {
       const {
         state: { $currentPageNumber },
@@ -43,12 +56,17 @@ export default class ReactQueryList<T extends any> extends PureComponent<
               currentPageSize: list.length,
             },
             list,
-            loading: false,
           }))
         })
         .catch(error => {
-          this.setState({ error, loading: false })
+          this.setState({ error })
           this.props.onError && this.props.onError(error)
+        })
+        .then(() => {
+          clearTimeout(timer)
+          Promise.resolve(pro).then(() => {
+            this.setState({ loading: false })
+          })
         })
     })
   }

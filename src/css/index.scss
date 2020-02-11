@@ -47,6 +47,7 @@
       line-height: size(2.8);
       @include no-select();
       color: $font-light;
+      vertical-align: middle;
     }
 
     .input {
@@ -60,6 +61,7 @@
       line-height: size(2.6);
       color: $font;
       outline: none;
+      vertical-align: middle;
 
       &:focus {
         border-color: $main;
