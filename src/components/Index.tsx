@@ -56,6 +56,7 @@ export default class ReactQueryList<T extends any> extends PureComponent<
               currentPageSize: list.length,
             },
             list,
+            error: '',
           }))
         })
         .catch(error => {

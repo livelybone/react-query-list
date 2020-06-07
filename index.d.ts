@@ -1,5 +1,5 @@
-import { PureComponent, ReactNode } from 'react'
 import ReactPagination, { PaginationProps } from '@livelybone/react-pagination'
+import { PureComponent, ReactNode } from 'react'
 
 interface ReactQueryListProps<T extends any> {
   children?: ReactNode | ((list: T[], error: string | Error) => ReactNode)

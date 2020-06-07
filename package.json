@@ -1,6 +1,6 @@
 {
   "name": "@livelybone/react-query-list",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A component of React for query list, includes pagination",
   "main": "./lib/umd/index.js",
   "module": "./lib/es/index.js",
