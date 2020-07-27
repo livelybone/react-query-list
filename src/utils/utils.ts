@@ -1,8 +1,8 @@
 import { ReactQueryListProps } from './types'
 
 export function isPaginationPropsDiff(
-  props?: ReactQueryListProps['paginationProps'],
-  $props?: ReactQueryListProps['paginationProps'],
+  props?: ReactQueryListProps<any>['paginationProps'],
+  $props?: ReactQueryListProps<any>['paginationProps'],
 ) {
   if (!props && !$props) return false
   if (!props || !$props) return true

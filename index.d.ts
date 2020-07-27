@@ -1,5 +1,5 @@
+import { ReactNode, PureComponent } from 'react'
 import ReactPagination, { PaginationProps } from '@livelybone/react-pagination'
-import { PureComponent, ReactNode } from 'react'
 
 interface ReactQueryListProps<T extends any> {
   children?: ReactNode | ((list: T[], error: string | Error) => ReactNode)
@@ -10,9 +10,7 @@ interface ReactQueryListProps<T extends any> {
     Exclude<keyof PaginationProps, 'onPageChange'>
   >
   loadingComp?: ReactNode
-
   onError?(error: string | Error): any
-
   onQuery(params: {
     pageSize: number
     pageIndex: number
@@ -36,19 +34,16 @@ declare class ReactQueryList<T extends any> extends PureComponent<
   ReactQueryListState<T>
 > {
   paginationRef: ReactPagination
-
+  unmounted: boolean
   constructor(props: ReactQueryListProps<T>)
-
   query(reset?: boolean): Promise<void>
-
   componentDidMount(): void
-
   componentDidUpdate(
     prevProps: Readonly<ReactQueryListProps<T>>,
     prevState: Readonly<ReactQueryListState<T>>,
     snapshot?: any,
   ): void
-
+  componentWillUnmount(): void
   render(): JSX.Element
 }
 

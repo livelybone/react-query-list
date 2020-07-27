@@ -96,6 +96,10 @@ export default class ReactQueryList<T extends any> extends PureComponent<
     }
   }
 
+  componentWillUnmount() {
+    this.setState = () => {}
+  }
+
   render() {
     const { children, className, loadingComp } = this.props
     const { $paginationProps, loading, list, error } = this.state
