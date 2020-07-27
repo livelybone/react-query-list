@@ -16,7 +16,7 @@ export interface ReactQueryListProps<T extends any> {
   onQuery(params: {
     pageSize: number
     pageIndex: number
-  }): Promise<{
+  }): PromiseLike<{
     pageCount?: number
     list: T[]
     [key: string]: any

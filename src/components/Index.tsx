@@ -46,8 +46,9 @@ export default class ReactQueryList<T extends any> extends PureComponent<
         state: { $currentPageNumber },
         props: { pageSize },
       } = this.paginationRef
-      return this.props
-        .onQuery({ pageIndex: +$currentPageNumber, pageSize })
+      return Promise.resolve(
+        this.props.onQuery({ pageIndex: +$currentPageNumber, pageSize }),
+      )
         .then(({ pageCount, list }) => {
           this.setState(pre => ({
             $paginationProps: {

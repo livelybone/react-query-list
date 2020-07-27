@@ -14,14 +14,13 @@ interface ReactQueryListProps<T extends any> {
   onQuery(params: {
     pageSize: number
     pageIndex: number
-  }): Promise<{
+  }): PromiseLike<{
     pageCount?: number
     list: T[]
     [key: string]: any
     [key: number]: any
   }>
 }
-
 interface ReactQueryListState<T extends any> {
   loading: boolean
   list: T[]
@@ -34,7 +33,6 @@ declare class ReactQueryList<T extends any> extends PureComponent<
   ReactQueryListState<T>
 > {
   paginationRef: ReactPagination
-  unmounted: boolean
   constructor(props: ReactQueryListProps<T>)
   query(reset?: boolean): Promise<void>
   componentDidMount(): void
